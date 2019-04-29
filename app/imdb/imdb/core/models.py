@@ -31,8 +31,8 @@ class Title(models.Model):
     primary_title = models.CharField(max_length=255)
     original_title = models.CharField(max_length=255)
     is_adult = models.BooleanField()
-    start_year = models.CharField()
-    end_year = models.CharField()
+    start_year = models.CharField(max_length=10)
+    end_year = models.CharField(max_length=10)
     runtime_minutes = models.IntegerField()
     genres = models.ManyToManyField('Genre')
 
@@ -59,8 +59,8 @@ class Person(models.Model):
 
 class Crew(models.Model):
     title = models.ForeignKey('Title', on_delete=models.CASCADE)
-    directors = models.ManyToManyField('Person')
-    writers = models.ManyToManyField('Writers')
+    directors = models.ManyToManyField('Person', related_name="directors")
+    writers = models.ManyToManyField('Person', related_name="writers")
 
 
 class Principal(models.Model):
@@ -79,7 +79,7 @@ class Rating(models.Model):
 
 
 class Episode(models.Model):
-    title = models.ForeignKey('Title', on_delete=models.CASCADE)
-    parent_title = models.ForeignKey('Title', on_delete=models.CASCADE)
+    title = models.ForeignKey('Title', on_delete=models.CASCADE, related_name="title")
+    parent_title = models.ForeignKey('Title', on_delete=models.CASCADE, related_name="parent_title")
     season_number = models.IntegerField()
     episode_number = models.IntegerField()
