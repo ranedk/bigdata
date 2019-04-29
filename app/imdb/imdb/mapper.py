@@ -16,7 +16,7 @@ from core.models import (
 
 
 def read_file(filename):
-    lines = open(filename).read().split("\n")
+    lines = open(filename, 'r', encoding='utf-8').readlines()
     return lines
 
 
