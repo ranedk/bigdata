@@ -1,4 +1,18 @@
-from core.models import Genre, Format, Title
+from core.models import (
+    Genre,
+    Format,
+    Region,
+    Language,
+    Profession,
+    Category,
+    Title,
+    TitleAka,
+    Person,
+    Crew,
+    Principal,
+    Rating,
+    Episode
+)
 
 
 def read_file(filename):
@@ -216,7 +230,7 @@ def title_episode(lines):
         if Episode.object.exists(title=title):
             Episode.objects.create(
                 title=title,
-                product_title,
+                parent_title=parent_title,
                 season_number=season_number,
                 episode_number=episode_number
             )
